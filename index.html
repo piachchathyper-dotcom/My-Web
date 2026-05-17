@@ -238,7 +238,7 @@ if (photos.length === 0) {
 } else {
   photos.forEach(name => {
     const img = document.createElement('img');
-    img.src = `photos/${name}`;
+    img.src = `photo/${name}`;
     img.alt = name;
     img.onclick = () => openLightbox(img.src);
     grid.appendChild(img);
