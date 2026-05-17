@@ -1,0 +1,185 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#080B10;color:#C9D1D9;font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden;position:relative}
+.grid-bg{position:fixed;inset:0;background-image:linear-gradient(rgba(0,255,148,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,148,0.03) 1px,transparent 1px);background-size:44px 44px;pointer-events:none;z-index:0}
+.glow-orb{position:fixed;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(0,255,148,0.06) 0%,transparent 70%);top:-100px;left:-100px;pointer-events:none;z-index:0;animation:orbmove 8s ease-in-out infinite alternate}
+@keyframes orbmove{to{transform:translate(200px,150px)}}
+main{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:2.5rem 1.5rem}
+.header{margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:1px solid #1A2030}
+.sys-line{font-family:'Space Mono',monospace;font-size:10px;color:#00FF94;letter-spacing:2px;margin-bottom:1rem;opacity:0.7}
+.sys-line span{color:#0094FF}
+.name-big{font-family:'Space Mono',monospace;font-size:clamp(28px,5vw,48px);font-weight:700;line-height:1.1;margin-bottom:0.3rem}
+.name-big .accent{color:#00FF94}
+.name-big .accent2{color:#0094FF}
+.alias{font-family:'Space Mono',monospace;font-size:13px;color:#6B7280;margin-bottom:1rem}
+.alias span{color:#00FF94;font-weight:700}
+.status-row{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-family:'Space Mono',monospace;padding:4px 12px;border-radius:4px;letter-spacing:1px}
+.badge-green{background:rgba(0,255,148,0.1);color:#00FF94;border:1px solid rgba(0,255,148,0.3)}
+.badge-blue{background:rgba(0,148,255,0.1);color:#0094FF;border:1px solid rgba(0,148,255,0.3)}
+.badge-gray{background:rgba(107,114,128,0.15);color:#9CA3AF;border:1px solid rgba(107,114,128,0.3)}
+.dot{width:7px;height:7px;border-radius:50%;background:#00FF94;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,255,148,0.4)}50%{opacity:0.7;box-shadow:0 0 0 5px rgba(0,255,148,0)}}
+.nav{display:flex;gap:8px;margin-bottom:2rem;flex-wrap:wrap}
+.nav-btn{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1.5px;padding:8px 18px;border-radius:4px;border:1px solid #1E2D40;background:transparent;color:#6B7280;cursor:pointer;transition:all 0.2s;text-transform:uppercase}
+.nav-btn:hover{border-color:#00FF94;color:#00FF94;background:rgba(0,255,148,0.05)}
+.nav-btn.active{border-color:#00FF94;color:#00FF94;background:rgba(0,255,148,0.08);box-shadow:0 0 12px rgba(0,255,148,0.1)}
+.section{display:none;animation:fadeIn 0.3s ease}
+.section.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.terminal-box{background:#0D1117;border:1px solid #1A2030;border-radius:8px;overflow:hidden;margin-bottom:1.2rem}
+.terminal-bar{background:#161B22;padding:10px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #1A2030}
+.t-dot{width:11px;height:11px;border-radius:50%}
+.t-bar-title{font-family:'Space Mono',monospace;font-size:11px;color:#6B7280;margin-left:8px}
+.terminal-body{padding:1.25rem 1.5rem;font-family:'Space Mono',monospace;font-size:13px;line-height:2}
+.t-prompt{color:#00FF94}
+.t-cmd{color:#C9D1D9}
+.t-out{color:#8B949E;padding-left:1.2rem}
+.t-val{color:#0094FF}
+.t-yellow{color:#FFD700}
+.t-pink{color:#FF79C6}
+.highlight{color:#00FF94}
+.t-comment{color:#3A4A5A;font-style:italic}
+.t-tag{display:inline-block;font-size:10px;padding:1px 7px;border-radius:3px;background:rgba(0,148,255,0.1);color:#0094FF;border:1px solid rgba(0,148,255,0.25);margin:1px 3px;vertical-align:middle}
+.t-section-gap{margin-top:0.8rem}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.section-title{font-family:'Space Mono',monospace;font-size:11px;color:#00FF94;letter-spacing:3px;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:10px}
+.section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(0,255,148,0.3),transparent)}
+.divider{height:1px;background:linear-gradient(90deg,#00FF94,transparent);opacity:0.15;margin:1rem 0}
+</style>
+
+<div class="grid-bg"></div>
+<div class="glow-orb"></div>
+<main>
+  <div class="header">
+    <div class="sys-line">// <span>PORTFOLIO</span> — INITIALIZED — v1.0.0</div>
+    <div class="name-big">
+      <span class="accent">Phirachat</span><br>
+      <span class="accent2">Phetchawang</span>
+    </div>
+    <div class="alias">Name in Online: <span>PiachchatKup</span> &nbsp;|&nbsp; NN: Peeth</div>
+    <div class="status-row">
+      <span class="badge badge-green"><span class="dot"></span>ONLINE</span>
+      <span class="badge badge-blue">ม.3 Student</span>
+      <span class="badge badge-gray">Thailand 🇹🇭</span>
+    </div>
+  </div>
+
+  <div class="nav">
+    <button class="nav-btn active" onclick="showSection('about',this)">// About</button>
+    <button class="nav-btn" onclick="showSection('skills',this)">// Skills</button>
+    <button class="nav-btn" onclick="showSection('info',this)">// Info</button>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="section active" id="sec-about">
+    <div class="section-title">about_me.txt</div>
+    <div class="terminal-box">
+      <div class="terminal-bar">
+        <div class="t-dot" style="background:#FF5F57"></div>
+        <div class="t-dot" style="background:#FFBD2E"></div>
+        <div class="t-dot" style="background:#28CA42"></div>
+        <span class="t-bar-title">bash — about_me.txt</span>
+      </div>
+      <div class="terminal-body">
+        <div><span class="t-prompt">~/PiachchatKup $</span> <span class="t-cmd">cat about.txt</span></div>
+        <div class="t-out">Hey, I'm <span class="t-val">Phirachat</span> And My NN <span class="t-val">Peeth</span>.</div>
+        <div class="t-out">อยู่ ม.3 คุบุๆ</div>
+        <div class="t-out">I Like <span class="highlight">Server, IT support</span> And OB production</div>
+        <div class="t-out">เป็นคนที่ <span class="highlight">ชื่อบื้อ ขี้มึน หูตึง</span> อะไรน่ะ</div>
+        <br>
+        <div><span class="t-prompt">~/PiachchatKup $</span> <span class="t-cmd">whoami --detail</span></div>
+        <div class="t-out">OB / Live Production Crew</div>
+        <div class="t-out">Homelab Nerd (Proxmox + Pi-hole + Nginx)</div>
+        <div class="t-out">&nbsp; Football ⚽ &nbsp;|&nbsp; MLBB 🎮</div>
+        <br>
+        <div><span class="t-prompt">~/PiachchatKup $</span> <span class="t-cmd">_</span><span style="animation:blink 1s infinite;color:#00FF94">▋</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="section" id="sec-skills">
+    <div class="section-title">skills.json</div>
+    <div class="terminal-box">
+      <div class="terminal-bar">
+        <div class="t-dot" style="background:#FF5F57"></div>
+        <div class="t-dot" style="background:#FFBD2E"></div>
+        <div class="t-dot" style="background:#28CA42"></div>
+        <span class="t-bar-title">bash — skills.json</span>
+      </div>
+      <div class="terminal-body">
+        <div><span class="t-prompt">~/PiachchatKup $</span> <span class="t-cmd">cat skills.json | jq</span></div>
+        <br>
+        <div class="t-comment">&nbsp;&nbsp;# ── Coding ──────────────────────────</div>
+        <div class="t-out"><span class="t-yellow">"Coding"</span>: <span class="t-val">Web Dev, Game Server (นิดหน่อย แต่เป็นน่ะ 555)</span></div>
+        <div class="t-out">&nbsp;&nbsp;tags: <span class="t-tag">HTML/CSS</span><span class="t-tag">JavaScript</span><span class="t-tag">Python</span><span class="t-tag">Bash</span></div>
+        <br>
+        <div class="t-comment">&nbsp;&nbsp;# ── Sound Engineer ──────────────────</div>
+        <div class="t-out"><span class="t-yellow">"Sound"</span>: <span class="t-val">MIC Setup, EQ, Mixing, Audio Routing, Interface</span></div>
+        <div class="t-out">&nbsp;&nbsp;tags: <span class="t-tag">Live Mixing</span><span class="t-tag">Audio Interface</span><span class="t-tag">Amp Sim</span><span class="t-tag">Routing</span></div>
+        <br>
+        <div class="t-comment">&nbsp;&nbsp;# ── IT Support ──────────────────────</div>
+        <div class="t-out"><span class="t-yellow">"IT Support"</span>: <span class="t-val">HW/SW Troubleshoot, OS Install, Networking</span></div>
+        <div class="t-out">&nbsp;&nbsp;tags: <span class="t-tag">Windows</span><span class="t-tag">Linux</span><span class="t-tag">Proxmox</span><span class="t-tag">Networking</span></div>
+        <br>
+        <div class="t-comment">&nbsp;&nbsp;# ── OB / Live Production ────────────</div>
+        <div class="t-out"><span class="t-yellow">"OB/Live"</span>: <span class="t-val">Football Replay, Highlight, School OB, Switcher</span></div>
+        <div class="t-out">&nbsp;&nbsp;tags: <span class="t-tag">OBS</span><span class="t-tag">vMix</span><span class="t-tag">NDI</span><span class="t-tag">1080p - 4K</span></div>
+        <br>
+        <div class="t-comment">&nbsp;&nbsp;# ── Server Admin ────────────────────</div>
+        <div class="t-out"><span class="t-yellow">"Server"</span>: <span class="t-val">Minecraft, GTA SAMP, FiveM, Plugin Config</span></div>
+        <div class="t-out">&nbsp;&nbsp;tags: <span class="t-tag">Paper MC</span><span class="t-tag">LuckPerms</span><span class="t-tag">CoreProtect</span><span class="t-tag">Velocity</span></div>
+        <br>
+        <div class="t-comment">&nbsp;&nbsp;# ── Homelab ─────────────────────────</div>
+        <div class="t-out"><span class="t-yellow">"Homelab"</span>: <span class="t-val">Self-hosted infra, Proxmox VMs, Pi-hole, Nginx</span></div>
+        <div class="t-out">&nbsp;&nbsp;tags: <span class="t-tag">Proxmox</span><span class="t-tag">Pi-hole</span><span class="t-tag">Nginx</span><span class="t-tag">Flask</span></div>
+        <br>
+        <div><span class="t-prompt">~/PiachchatKup $</span> <span class="t-cmd">_</span><span style="animation:blink 1s infinite;color:#00FF94">▋</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INFO -->
+  <div class="section" id="sec-info">
+    <div class="section-title">personal_info.json</div>
+    <div class="terminal-box">
+      <div class="terminal-bar">
+        <div class="t-dot" style="background:#FF5F57"></div>
+        <div class="t-dot" style="background:#FFBD2E"></div>
+        <div class="t-dot" style="background:#28CA42"></div>
+        <span class="t-bar-title">bash — personal_info.json</span>
+      </div>
+      <div class="terminal-body">
+        <div><span class="t-prompt">~/PiachchatKup $</span> <span class="t-cmd">cat personal_info.json</span></div>
+        <br>
+        <div class="t-out"><span class="t-pink">full_name</span>: &nbsp;&nbsp;&nbsp;&nbsp;<span class="t-val">"Phirachat Phetchawang"</span></div>
+        <div class="t-out"><span class="t-pink">nickname</span>: &nbsp;&nbsp;&nbsp;&nbsp;<span class="t-val">"Peeth"</span> <span class="t-comment">// พีท</span></div>
+        <div class="t-out"><span class="t-pink">handle</span>: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="highlight">"PiachchatKup"</span></div>
+        <div class="t-out"><span class="t-pink">education</span>: &nbsp;&nbsp;<span class="t-val">"M.3"</span> <span class="t-comment">// ม.3</span></div>
+        <div class="t-out"><span class="t-pink">field</span>: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-val">"IT / Information Technology"</span></div>
+        <div class="t-out"><span class="t-pink">location</span>: &nbsp;&nbsp;&nbsp;<span class="t-val">"Thailand 🇹🇭"</span></div>
+        <div class="t-out"><span class="t-pink">hobbies</span>: &nbsp;&nbsp;&nbsp;&nbsp;[<span class="t-val">"Football ⚽"</span>, <span class="t-val">"MLBB 🎮"</span>, <span class="t-val">"Guitar 🎸"</span>]</div>
+        <div class="t-out"><span class="t-pink">status</span>: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="highlight">"● Online / Available"</span></div>
+        <br>
+        <div><span class="t-prompt">~/PiachchatKup $</span> <span class="t-cmd">cat projects.log</span></div>
+        <br>
+        <div class="t-out"><span class="t-yellow">[PROJECT]</span> <span class="t-val">Homelab</span> — Proxmox + Pi-hole + Status Page</div>
+        <div class="t-out"><span class="t-yellow">[PROJECT]</span> <span class="t-val">OB Live Stream</span> — Live 1080p–4K</div>
+        <br>
+        <div><span class="t-prompt">~/PiachchatKup $</span> <span class="t-cmd">_</span><span style="animation:blink 1s infinite;color:#00FF94">▋</span></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+function showSection(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
