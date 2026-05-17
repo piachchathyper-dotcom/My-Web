@@ -48,10 +48,26 @@ main{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:2.5rem 1.
 .section-title{font-family:'Space Mono',monospace;font-size:11px;color:#00FF94;letter-spacing:3px;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:10px}
 .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(0,255,148,0.3),transparent)}
 .divider{height:1px;background:linear-gradient(90deg,#00FF94,transparent);opacity:0.15;margin:1rem 0}
+.photo-grid{columns:2;gap:12px;margin-top:0.8rem}
+.photo-grid img{width:100%;margin-bottom:12px;border-radius:6px;border:1px solid #1A2030;display:block;break-inside:avoid;cursor:pointer;transition:border-color 0.2s,transform 0.2s}
+.photo-grid img:hover{border-color:#00FF94;transform:scale(1.01)}
+.photo-empty{color:#3A4A5A;font-style:italic;padding-left:1.2rem}
+/* Lightbox */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:999;align-items:center;justify-content:center}
+.lightbox.open{display:flex}
+.lightbox img{max-width:90vw;max-height:90vh;border-radius:8px;border:1px solid #1A2030}
+.lightbox-close{position:fixed;top:20px;right:28px;font-size:28px;color:#00FF94;cursor:pointer;font-family:'Space Mono',monospace;z-index:1000}
 </style>
 
 <div class="grid-bg"></div>
 <div class="glow-orb"></div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close">✕</span>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
 <main>
   <div class="header">
     <div class="sys-line">// <span>PORTFOLIO</span> — INITIALIZED — v1.0.0</div>
@@ -71,6 +87,7 @@ main{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:2.5rem 1.
     <button class="nav-btn active" onclick="showSection('about',this)">// About</button>
     <button class="nav-btn" onclick="showSection('skills',this)">// Skills</button>
     <button class="nav-btn" onclick="showSection('info',this)">// Info</button>
+    <button class="nav-btn" onclick="showSection('photos',this)">// Photos</button>
   </div>
 
   <!-- ABOUT -->
@@ -97,10 +114,10 @@ main{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:2.5rem 1.
         <div class="t-out">&nbsp; Football ⚽ &nbsp;|&nbsp; MLBB 🎮</div>
         <br>
         <div><span class="t-prompt">~/PiachchatKup $</span> <span class="t-cmd">cat My_Socials.txt</span></div>
-      <div class="t-out" style="color:#ffffff">My Tiktok <a href="https://tiktok.com/@PiachchatKub" style="color:#ffffff;text-decoration:none"><span>PiachchatKup</span></a></div>
-      <div class="t-out" style="color:#FF0000">My Youtube <a href="https://www.youtube.com/@Piachchat" style="color:#FF0000;text-decoration:none"><span>PiachchatKup</span></a></div>
-      <div class="t-out" style="color:#1877F2">My Facebook <a href="https://facebook.com/PiachchatKup" style="color:#1877F2;text-decoration:none"><span>PiachchatKup</span></a></div>
-      <div class="t-out" style="color:#E1306C">My Instagram <a href="https://instagram.com/PiachchatKup" style="color:#E1306C;text-decoration:none"><span>PiachchatKup</span></a></div>
+        <div class="t-out" style="color:#ffffff">My Tiktok <a href="https://tiktok.com/@PiachchatKub" style="color:#ffffff;text-decoration:none"><span>PiachchatKup</span></a></div>
+        <div class="t-out" style="color:#FF0000">My Youtube <a href="https://www.youtube.com/@Piachchat" style="color:#FF0000;text-decoration:none"><span>PiachchatKup</span></a></div>
+        <div class="t-out" style="color:#1877F2">My Facebook <a href="https://facebook.com/PiachchatKup" style="color:#1877F2;text-decoration:none"><span>PiachchatKup</span></a></div>
+        <div class="t-out" style="color:#E1306C">My Instagram <a href="https://instagram.com/PiachchatKup" style="color:#E1306C;text-decoration:none"><span>PiachchatKup</span></a></div>
         <br>
         <div><span class="t-prompt">~/PiachchatKup $</span> <span class="t-cmd">_</span><span style="animation:blink 1s infinite;color:#00FF94">▋</span></div>
       </div>
@@ -168,7 +185,7 @@ main{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:2.5rem 1.
         <div class="t-out"><span class="t-pink">education</span>: &nbsp;&nbsp;<span class="t-val">"M.3" </span><span class="t-comment">Study At Nuaklongprachabumrung School</span></div>
         <div class="t-out"><span class="t-pink">field</span>: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-val">"IT / Information Technology"</span></div>
         <div class="t-out"><span class="t-pink">location</span>: &nbsp;&nbsp;&nbsp;<span class="t-val">"Thailand 🇹🇭"</span> <span class="t-comment">Live in Krabi</span></div>
-        <div class="t-out"><span class="t-pink">hobbies</span>: &nbsp;&nbsp;&nbsp;&nbsp;[<span class="t-val">"Football ⚽"</span>, <span class="t-val">"Many Game 🎮"</span>, <span class="t-val"></span>]</div>
+        <div class="t-out"><span class="t-pink">hobbies</span>: &nbsp;&nbsp;&nbsp;&nbsp;[<span class="t-val">"Football ⚽"</span>, <span class="t-val">"Many Game 🎮"</span>]</div>
         <div class="t-out"><span class="t-pink">status</span>: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="highlight">"● Online / Available"</span></div>
         <br>
         <div><span class="t-prompt">~/PiachchatKup $</span> <span class="t-cmd">cat projects.log</span></div>
@@ -180,13 +197,68 @@ main{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:2.5rem 1.
       </div>
     </div>
   </div>
+
+  <!-- PHOTOS -->
+  <div class="section" id="sec-photos">
+    <div class="section-title">my_photos/</div>
+    <div class="terminal-box">
+      <div class="terminal-bar">
+        <div class="t-dot" style="background:#FF5F57"></div>
+        <div class="t-dot" style="background:#FFBD2E"></div>
+        <div class="t-dot" style="background:#28CA42"></div>
+        <span class="t-bar-title">bash — my_photos/</span>
+      </div>
+      <div class="terminal-body">
+        <div><span class="t-prompt">~/PiachchatKup $</span> <span class="t-cmd">ls my_photos/</span></div>
+        <br>
+        <div id="photo-grid" class="photo-grid"></div>
+        <div id="photo-empty" class="photo-empty" style="display:none">// ยังไม่มีรูป — ใส่ชื่อไฟล์ใน photos[] ใน script</div>
+        <br>
+        <div><span class="t-prompt">~/PiachchatKup $</span> <span class="t-cmd">_</span><span style="animation:blink 1s infinite;color:#00FF94">▋</span></div>
+      </div>
+    </div>
+  </div>
 </main>
 
 <script>
-function showSection(id,btn){
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('sec-'+id).classList.add('active');
+// ✏️ เพิ่มชื่อไฟล์รูปตรงนี้ได้เลย (วางรูปไว้ในโฟลเดอร์ photos/)
+const photos = [
+  // "photo1.jpg",
+  // "photo2.jpg",
+];
+
+const grid = document.getElementById('photo-grid');
+const empty = document.getElementById('photo-empty');
+
+if (photos.length === 0) {
+  empty.style.display = 'block';
+} else {
+  photos.forEach(name => {
+    const img = document.createElement('img');
+    img.src = `photos/${name}`;
+    img.alt = name;
+    img.onclick = () => openLightbox(img.src);
+    grid.appendChild(img);
+  });
+}
+
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('open');
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLightbox();
+});
+
+function showSection(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
   btn.classList.add('active');
 }
 </script>
